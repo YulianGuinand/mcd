@@ -2,7 +2,7 @@ import SignInForm from "@/components/form/signInForm";
 
 const page = () => {
   return (
-    <div className="w-full">
+    <div className="container mx-auto ">
       <SignInForm />
     </div>
   );

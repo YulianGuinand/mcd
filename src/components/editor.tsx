@@ -24,6 +24,7 @@ import {
   UploadIcon,
 } from "lucide-react";
 import Attribut from "./attribut";
+import UserNav from "./auth/userNav";
 import DownloadButton from "./downloadBtn";
 import LoadButton from "./loadBtn";
 import { Button } from "./ui/button";
@@ -247,21 +248,21 @@ const TableNode = ({
           </DialogContent>
         </Dialog>
       </div>
-      <div className="py-2">
-        {data.attributes.map((attr, index) => (
-          <Attribut
-            key={index}
-            attr={attr}
-            id={id}
-            isRelation={false}
-            updateAttribute={updateAttribute}
-            deleteAttribute={deleteAttribute}
-          />
-        ))}
+      {data.attributes.map((attr, index) => (
+        <Attribut
+          key={index}
+          attr={attr}
+          id={id}
+          isRelation={false}
+          updateAttribute={updateAttribute}
+          deleteAttribute={deleteAttribute}
+        />
+      ))}
+      <div className="p-2">
         <Button
           variant={"ghost"}
           size={"sm"}
-          className="w-full mt-2"
+          className="w-full"
           onClick={addAttribute}
         >
           <PlusCircle className="w-4 h-4 mr-2" />
@@ -371,21 +372,21 @@ const RelationNode = ({ id, data, updateNodeData }: RelationNodeProps) => {
         </Dialog>
       </div>
       {/* Affichage des attributs */}
-      <div className="p-2 ">
-        {data.attributes.map((attr, index) => (
-          <Attribut
-            key={index}
-            attr={attr}
-            id={id}
-            isRelation={true}
-            updateAttribute={updateAttribute}
-            deleteAttribute={deleteAttribute}
-          />
-        ))}
+      {data.attributes.map((attr, index) => (
+        <Attribut
+          key={index}
+          attr={attr}
+          id={id}
+          isRelation={true}
+          updateAttribute={updateAttribute}
+          deleteAttribute={deleteAttribute}
+        />
+      ))}
+      <div className="p-2">
         <Button
           variant={"ghost"}
           size={"sm"}
-          className="w-full mt-2"
+          className="w-full"
           onClick={addAttribute}
         >
           <PlusCircle className="w-4 h-4 mr-2" />
@@ -397,7 +398,7 @@ const RelationNode = ({ id, data, updateNodeData }: RelationNodeProps) => {
 };
 
 // L'EDITEUR
-export default function MCDEditor() {
+export default function MCDEditor({ user }: { user?: any }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -801,6 +802,7 @@ ${prompt}`;
             <PlusCircle className="w-4 h-4" />
             Nouvelle Relation
           </Button>
+          {user && <UserNav>{user.username}</UserNav>}
         </div>
         <Controls />
         <MiniMap />

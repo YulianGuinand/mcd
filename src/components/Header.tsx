@@ -1,7 +1,12 @@
+import { authOptions } from "@/lib/auth";
 import { ArrowRight, MenuIcon } from "lucide-react";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
 import { Button } from "./ui/button";
 
-export const Header = () => {
+export const Header = async () => {
+  const session = await getServerSession(authOptions);
+
   return (
     <header className="sticky top-0 backdrop-blur-sm z-20">
       <div className="flex justify-center items-center py-3 bg-black text-white text-sm gap-3">
@@ -24,12 +29,23 @@ export const Header = () => {
               <a href="#">Customers</a>
               <a href="#">Updates</a>
               <a href="#">Help</a>
-              <Button
-                variant="primary"
-                className="inline-flex items-center justify-center font-medium tracking-tight"
-              >
-                Get for free
-              </Button>
+              <Link href="/maker">
+                {session?.user ? (
+                  <Button
+                    variant="primary"
+                    className="inline-flex items-center justify-center font-medium tracking-tight"
+                  >
+                    Create MCD
+                  </Button>
+                ) : (
+                  <Button
+                    variant="primary"
+                    className="inline-flex items-center justify-center font-medium tracking-tight"
+                  >
+                    Get for free
+                  </Button>
+                )}
+              </Link>
             </nav>
           </div>
         </div>

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import GoogleSignInButton from "../GoogleSignInButton";
+import GoogleSignInButton from "../googleSignInButton";
 import { Button } from "../ui/button";
 import {
   Form,
@@ -52,7 +52,7 @@ const SignInForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="space-y-2">
           <FormField
             control={form.control}
@@ -61,11 +61,7 @@ const SignInForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="email@example.com"
-                    {...field}
-                    className="bg-zinc-100"
-                  />
+                  <Input placeholder="email@example.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -82,7 +78,6 @@ const SignInForm = () => {
                     type="password"
                     placeholder="Enter your password"
                     {...field}
-                    className="bg-zinc-100"
                   />
                 </FormControl>
                 <FormMessage />
@@ -90,14 +85,14 @@ const SignInForm = () => {
             )}
           />
         </div>
-        <Button className="w-full mt-6" type="submit">
+        <Button variant="primary" className="w-full mt-6" type="submit">
           Sign in
         </Button>
       </form>
       <div className="mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
         or
       </div>
-      {/* {<GoogleSignInButton>Sign in with Google</GoogleSignInButton>} */}
+      {<GoogleSignInButton>Sign in with Google</GoogleSignInButton>}
       <p className="text-center text-sm text-gray-600 mt-2">
         If you don&apos;t have an account, please&nbsp;
         <Link href="/sign-up" className="text-blue-500 hover:underline">
