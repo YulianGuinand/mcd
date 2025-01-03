@@ -23,6 +23,7 @@ import {
   PlusCircle,
   UploadIcon,
 } from "lucide-react";
+import Image from "next/image";
 import Attribut from "./attribut";
 import UserNav from "./auth/userNav";
 import DownloadButton from "./downloadBtn";
@@ -802,7 +803,21 @@ ${prompt}`;
             <PlusCircle className="w-4 h-4" />
             Nouvelle Relation
           </Button>
-          {user && <UserNav>{user.username}</UserNav>}
+          {user && (
+            <UserNav>
+              {user.image ? (
+                <Image
+                  alt="ProfileImage"
+                  src={user.image}
+                  width={40}
+                  height={30}
+                  className="rounded-full"
+                />
+              ) : (
+                <Button variant="primary">Profile</Button>
+              )}
+            </UserNav>
+          )}
         </div>
         <Controls />
         <MiniMap />

@@ -17,9 +17,7 @@ import {
 const UserNav = ({ children }: { children: ReactNode }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="primary">{children}</Button>
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
       <DropdownMenuContent className="dark">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />

@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import { db } from "./db";
 
 export const authOptions: NextAuthOptions = {
@@ -22,7 +23,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("CREDENTIALS : ", credentials);
 
         if (!credentials?.email || !credentials?.password) return null;
 
@@ -34,12 +34,15 @@ export const authOptions: NextAuthOptions = {
 
         if (!existingUser) return null;
 
-        const passwordMatch = compare(
-          credentials.password,
-          existingUser.password
-        );
+        if (existingUser.password) {
+          const passwordMatch = compare(
+            credentials.password,
+            existingUser.password
+          );
 
-        if (!passwordMatch) return null;
+          if (!passwordMatch) return null;
+        }
+
 
         return {
           id: `${existingUser.id}`,
@@ -47,6 +50,10 @@ export const authOptions: NextAuthOptions = {
           username: existingUser.username,
         };
       },
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
   callbacks: {
