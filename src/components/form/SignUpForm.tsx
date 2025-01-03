@@ -59,8 +59,12 @@ const SignUpForm = () => {
     });
 
     if (response.ok) {
-      toast({ description: "User created sucessfully" });
+      router.refresh();
+      toast({ title: "Success !", description: "User created sucessfully" });
       router.push("/sign-in");
+    } else {
+      const message = await response.json();
+      toast({ title: "Something went wrong !", description: message.message });
     }
   };
 
@@ -75,11 +79,7 @@ const SignUpForm = () => {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter your username"
-                    {...field}
-                    className="bg-zinc-100"
-                  />
+                  <Input placeholder="Enter your username" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -92,11 +92,7 @@ const SignUpForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="email@example.com"
-                    {...field}
-                    className="bg-zinc-100"
-                  />
+                  <Input placeholder="email@example.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,7 +109,6 @@ const SignUpForm = () => {
                     type="password"
                     placeholder="Enter your password"
                     {...field}
-                    className="bg-zinc-100"
                   />
                 </FormControl>
                 <FormMessage />
@@ -131,7 +126,6 @@ const SignUpForm = () => {
                     type="password"
                     placeholder="Re-enter your password"
                     {...field}
-                    className="bg-zinc-100"
                   />
                 </FormControl>
                 <FormMessage />
