@@ -21,6 +21,7 @@ import {
   FileIcon,
   LoaderIcon,
   PlusCircle,
+  StarsIcon,
   UploadIcon,
 } from "lucide-react";
 import Image from "next/image";
@@ -872,7 +873,10 @@ ${prompt}`;
             {loading ? (
               <LoaderIcon className="size-5 animate-spin text-primary" />
             ) : (
-              "Generate"
+              <>
+                <StarsIcon className="size-4" />
+                Generate
+              </>
             )}
           </Button>
         </Panel>

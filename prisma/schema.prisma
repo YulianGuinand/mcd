@@ -10,6 +10,8 @@ generator client {
 model User {
   id            String          @id @default(cuid())
   username String? @unique
+  customerId String? @unique
+  plan String?
   password String?
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
