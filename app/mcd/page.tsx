@@ -1,3 +1,4 @@
+import { MCDEditor } from "@/components/editor/MCDEditor";
 import { auth } from "@/lib/auth/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -9,5 +10,5 @@ export default async function MCDPage() {
     redirect("/sign-in");
   }
 
-  return <div>MCDPage</div>;
+  return <MCDEditor />;
 }
